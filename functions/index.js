@@ -1,28 +1,25 @@
 const functions = require("firebase-functions");
-const express = require('express');
-const { Nuxt } = require('nuxt');
 
-// Use a very simplified version of the config to run the already
-// build app on Firebase Functions.
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) => {
+//  response.send("Hello from Firebase!");
+// });
+
+const { Nuxt } = require("nuxt-start");
+
+const nuxtConfig = require("./nuxt.config.js");
+
 const config = {
-  // Don't start in dev mode.
+  ...nuxtConfig,
   dev: false,
-  debug:true,
-  // Set the path to the .nuxt folder.
-  buildDir: 'nuxt',
-  // Enable debug when in the develop environment.
-  debug: true,
-  // Path to the assets.
-  build: {
-    publicPath: '/client',
-  },
+  debug: false,
+  buildDir: "nuxt",
 };
-
-// Init Nuxt.js.
 const nuxt = new Nuxt(config);
-// Init express.
-const app = express();
-// Give nuxt middleware to express.
-app.use(nuxt.render);
 
-exports.ssrapp  = functions.https.onRequest(app);
+exports.ssrapp = functions.https.onRequest(async (req, res) => {
+  await nuxt.ready();
+  nuxt.render(req, res);
+});

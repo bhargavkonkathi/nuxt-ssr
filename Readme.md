@@ -1,7 +1,20 @@
-1. Install dependencies inside src using yarn install
-2. Install dependencies in functions folder
-3. Run yarn build inside src it will create nuxt folder inside folder. 
-4. Copy and move all contents from functions/nuxt/dist/client folder to public/client folder.
-5. Now run functions serve --only functions,hosting -p 5004 
-6. You should see build firebase hosting running and build running.
-7. Deploy firebase deploy --only functions,hosting.
+# nuxt-ssr
+
+## Build Setup
+
+```bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn dev
+
+# build for production and launch server
+$ yarn build
+$ yarn start
+
+# generate static project
+$ yarn generate
+```
+
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
